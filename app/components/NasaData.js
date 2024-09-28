@@ -279,6 +279,28 @@ export default function NasaData() {
     }
   };
 
+  const setDateRange = (range) => {
+    const endDate = new Date();
+    let startDate = new Date();
+
+    switch (range) {
+      case 'year':
+        startDate.setFullYear(startDate.getFullYear() - 1);
+        break;
+      case 'month':
+        startDate.setMonth(startDate.getMonth() - 1);
+        break;
+      case 'week':
+        startDate.setDate(startDate.getDate() - 7);
+        break;
+      default:
+        break;
+    }
+
+    setStartDate(startDate.toISOString().split('T')[0]);
+    setEndDate(endDate.toISOString().split('T')[0]);
+  };
+
   return (
     <div className={`${inter.className} min-h-screen bg-gray-900 text-gray-100 p-4 sm:p-8 overflow-x-hidden`}>
       <motion.div
@@ -389,6 +411,36 @@ export default function NasaData() {
                   <FaCalendarAlt className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                 </div>
               </div>
+            </div>
+
+            <div className="flex justify-between space-x-2">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="button"
+                onClick={() => setDateRange('year')}
+                className="flex-1 bg-gray-700 text-gray-200 py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300 text-sm sm:text-base"
+              >
+                Past Year
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="button"
+                onClick={() => setDateRange('month')}
+                className="flex-1 bg-gray-700 text-gray-200 py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300 text-sm sm:text-base"
+              >
+                Past Month
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="button"
+                onClick={() => setDateRange('week')}
+                className="flex-1 bg-gray-700 text-gray-200 py-2 px-4 rounded-md hover:bg-gray-600 transition duration-300 text-sm sm:text-base"
+              >
+                Past Week
+              </motion.button>
             </div>
 
             <motion.button
