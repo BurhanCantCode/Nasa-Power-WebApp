@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FaLocationArrow, FaCalendarAlt, FaSearch, FaGlobeAfrica, FaTemperatureHigh, FaSun, FaCheckCircle, FaSnowflake, FaCloudRain, FaCloudSunRain, FaWater, FaWind, FaTint, FaCloudSun } from "react-icons/fa";
 import { Inter } from 'next/font/google';
 import { FaSatellite } from 'react-icons/fa';
+import NASABackground from './NASABackground';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -302,12 +303,13 @@ export default function NasaData() {
   };
 
   return (
-    <div className={`${inter.className} min-h-screen bg-gray-900 text-gray-100 p-4 sm:p-8 overflow-x-hidden`}>
+    <div className={`${inter.className} min-h-screen bg-transparent text-gray-100 p-4 sm:p-8 overflow-x-hidden`}>
+      <NASABackground />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden"
+        className="max-w-4xl mx-auto bg-gray-800/70 rounded-xl shadow-lg overflow-hidden"
       >
         <div className="p-4 sm:p-8">
           <div className="flex items-center justify-between mb-6">
