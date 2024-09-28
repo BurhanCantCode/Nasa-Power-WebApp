@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaLocationArrow, FaCalendarAlt, FaSearch, FaGlobeAfrica, FaTemperatureHigh, FaSun, FaCheckCircle, FaSnowflake, FaCloudRain, FaCloudSunRain, FaWater, FaWind, FaTint, FaCloudSun } from "react-icons/fa";
 import { Inter } from 'next/font/google';
+import { FaSatellite } from 'react-icons/fa';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -68,7 +69,7 @@ export default function NasaData() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_NASA_API_URL}?start=${startDate.replace(/-/g, '')}&end=${endDate.replace(/-/g, '')}&latitude=${latitude}&longitude=${longitude}&community=re&parameters=T2M,PRECTOTCORR,WS2M,RH2M,ALLSKY_SFC_SW_DWN&format=json&user=demo&header=true`
+        `https://power.larc.nasa.gov/api/temporal/hourly/point?start=${startDate.replace(/-/g, '')}&end=${endDate.replace(/-/g, '')}&latitude=${latitude}&longitude=${longitude}&community=re&parameters=T2M,PRECTOTCORR,WS2M,RH2M,ALLSKY_SFC_SW_DWN&format=json&user=demo&header=true`
       );
       const result = await res.json();
       setData(result);
@@ -287,7 +288,18 @@ export default function NasaData() {
         className="max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-lg overflow-hidden"
       >
         <div className="p-4 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-100 mb-6">NASA Weather Data Explorer</h1>
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-100">NASA Weather Data Explorer</h1>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.reload()}
+              className="text-gray-100 hover:text-blue-400 transition-colors duration-300"
+              aria-label="Refresh page"
+            >
+              <FaSatellite className="text-3xl" />
+            </motion.button>
+          </div>
           <form onSubmit={fetchData} className="space-y-4 sm:space-y-6">
             <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
               <div className="flex-1">
