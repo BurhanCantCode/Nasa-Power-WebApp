@@ -5,6 +5,7 @@ import { FaLocationArrow, FaCalendarAlt, FaSearch, FaGlobeAfrica, FaTemperatureH
 import { Inter } from 'next/font/google';
 import { FaSatellite } from 'react-icons/fa';
 import NASABackground from './NASABackground';
+import AgriChatbot from './AgriChatbot';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -546,6 +547,9 @@ export default function NasaData() {
                     ))}
                   </tbody>
                 </table>
+              </div>
+              <div className="mt-8">
+                <AgriChatbot latitude={latitude} longitude={longitude} nasaData={data} />
               </div>
             </motion.div>
           )}
